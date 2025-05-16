@@ -49,7 +49,7 @@ byte newUid[] = {0x12, 0x34, 0x56, 0x69};
 3. Install the MFRC522 library:
    - Go to `Sketch > Include Library > Manage Libraries`
    - Search for "MFRC522" and install the library by Miguel Balboa
-4. Download the [app.ino](https://github.com/green-mochi/RC522_change_uid/blob/main/app.ino) from this project and upload it to your ESP32S3 board
+4. Download the [app.ino](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3-rc522-cuid.ino) from this project and upload it to your ESP32S3 board
 5. Open the Serial Monitor (baud rate: 9600) to see the program's output
 
 ## Usage
