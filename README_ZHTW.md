@@ -52,7 +52,7 @@ byte newUid[] = {0x12, 0x34, 0x56, 0x69};
 
    * 前往 `Sketch > 程式庫 > 管理程式庫`
    * 搜尋「MFRC522」並安裝 Miguel Balboa 的函式庫
-4. 下載此專案的[app.ino範例程式](https://github.com/green-mochi/RC522_change_uid/blob/main/app.ino)並上傳至 ESP32S3 開發板
+4. 下載此專案的[app.ino範例程式](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3-rc522-cuid.ino)並上傳至 ESP32S3 開發板
 5. 開啟序列埠監控器（鮑率設定為 9600），觀察程式輸出結果
 
 ## 使用方式
