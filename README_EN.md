@@ -1,18 +1,32 @@
-# RC522-changeidesp32
+Use an **Arduino UNO** or **ESP32S3** with the **MFRC522 RFID module** to modify the UID of a **CUID card (Gen2 Magic Card)**.
 
-This project allows you to modify the UID of RFID cards using an ESP32S3 microcontroller and an MFRC522 RFID reader module. It's specifically designed to work with Gen2 (Chinese Magic) RFID cards that have writable sector 0.
+This project provides example codes for both controllers. Choose the one that matches your development board.
 
 ## Hardware Requirements
 
-- ESP32S3 development board
-- MFRC522 RFID reader module
-- RFID cards (Gen2 / Magic Cards with writable UID aka "CUID")
-- Jumper wires for connections
+* Arduino UNO or ESP32S3 development board
+* MFRC522 RFID module
+* CUID card (Gen2 Magic Card)
+* Jumper wires
 
 ## Pin Connections
 
+### Arduino UNO (fixed pin configuration)
+
+| UNO Pin | MFRC522 Pin |
+| ------- | ----------- |
+| 9       | RST         |
+| 10      | SDA (SS)    |
+| 11      | MOSI        |
+| 12      | MISO        |
+| 13      | SCK         |
+| 3.3V    | 3.3V        |
+| GND     | GND         |
+
+### ESP32S3 (customizable pin configuration)
+
 | ESP32S3 Pin | MFRC522 Pin |
-|-------------|-------------|
+| ----------- | ----------- |
 | 4           | RST         |
 | 5           | SDA (SS)    |
 | 16          | MISO        |
@@ -21,71 +35,53 @@ This project allows you to modify the UID of RFID cards using an ESP32S3 microco
 | 3.3V        | 3.3V        |
 | GND         | GND         |
 
+For ESP32S3, please adjust the `SPI` and `MFRC522` pin definitions in the code according to your actual wiring.
+
 ## Features
 
-- Reads the original UID of a card
-- Writes a new predefined UID to the card
-- Verifies the authenticity of the card before writing
-- Prevents accidental rewriting to the same card (card must be removed before another card can be processed)
-- Provides clear user feedback via Serial Monitor
+* Read the original UID of a card
+* Verify if the card is a modifiable CUID (Gen2 Magic card)
+* Write a custom UID to block 0
+* Prevent duplicate writing to the same card
+* Display write status via serial monitor
 
-## Configuration
+## Set Custom UID
 
-To customize the new UID you want to write to cards, modify the `newUid` array in the code:
+Modify the `newUid` array in the code:
 
 ```cpp
-// Replace with your desired UID
-byte newUid[] = {0x12, 0x34, 0x56, 0x69};
+byte newUid[] = {0xDE, 0xAD, 0xBE, 0xEF};  // Your custom UID
 ```
 
-## Installation
+## How to Use
 
-1. Install the Arduino IDE
-2. Install the ESP32 board package:
-   - In Arduino IDE, go to `File > Preferences`
-   - Add `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json` to the "Additional Boards Manager URLs" field
-   - Go to `Tools > Board > Boards Manager`
-   - Search for "esp32" and install the ESP32 board package
-3. Install the MFRC522 library:
-   - Go to `Sketch > Include Library > Manage Libraries`
-   - Search for "MFRC522" and install the library by Miguel Balboa
-4. Download the [app.ino](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3-rc522-cuid.ino) from this project and upload it to your ESP32S3 board
-5. Open the Serial Monitor (baud rate: 9600) to see the program's output
+1. Choose the correct example sketch for your board:
 
-## Usage
-
-1. Connect the hardware as described in the Pin Connections section
-2. Upload the code to your ESP32S3 board
-3. Open the Serial Monitor at 9600 baud
-4. Place a compatible RFID card on the reader
-5. The program will read the original UID and attempt to write the new UID
-6. If successful, the program will display "UID written successfully!"
-7. Remove the card completely from the reader before placing another card
-
-## How It Works
-
-The program performs the following operations:
-
-1. Initializes the MFRC522 RFID reader and prepares the default keys for authentication
-2. Continuously checks for the presence of RFID cards
-3. When a card is detected, it reads the current UID
-4. It verifies if the card is new or the same as previously processed
-5. For new cards, it attempts to write the specified UID to Block 0
-6. It tracks card status to ensure proper processing flow
-7. Provides user feedback through the Serial Monitor
+   * [Arduino UNO Example](https://github.com/green-mochi/RC522-CUID/blob/main/arduino/arduino-rc522-cuid.ino)
+   * [ESP32S3 Example](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3/esp32s3-rc522-cuid.ino)
+2. Wire the hardware according to the pin configuration section
+3. Open the example in Arduino IDE and upload it to your board
+4. Open the Serial Monitor (baud rate: 9600 or 115200 depending on the sketch)
+5. Place a card near the reader
+6. If the card is compatible, the program will attempt to write the new UID and display the result
 
 ## Troubleshooting
 
-- **Card Not Detected**: Ensure proper wiring connections and check that the card is compatible
-- **Write Failed**: Not all cards support UID modification. Only Gen2/Magic Cards typically allow this
-- **Same Card Processed Multiple Times**: This program is designed to prevent this. Remove the card completely from the reader field before placing it again
-- **Communication Error**: If you encounter repeated communication errors, try resetting the ESP32 board
+* **Card not detected**: Double-check your wiring and ensure the card is a MIFARE-type
+* **UID write failed**: Make sure you are using a Gen2 Magic card (CUID) that supports writing to block 0
+* **Same card keeps being detected**: The program prevents duplicate writes; remove the card completely before trying again
+* **Unstable communication**: Check if jumper wires are loose
+* **Board not recognized**: Ensure drivers are installed, and that correct COM port and board type are selected in Arduino IDE. Install the board package via `Tools > Board > Board Manager` if needed
+* **Code upload fails**: Some boards require pressing a boot button during upload or using the correct USB port (some have multiple USB interfaces)
 
-## Warning
+## Legal Disclaimer
 
-Modifying card UIDs might be illegal in some jurisdictions or violate terms of service for systems using these cards. This code is provided for educational purposes only. Use responsibly and ethically.
+⚠️ Modifying the UID of RFID cards may be illegal in some countries or regions. This project is intended for educational and lawful use only. Please comply with your local laws and regulations.
 
-## Credits
+## Acknowledgments
 
-Based on the [MFRC522](https://github.com/miguelbalboa/rfid) library examples and modified for ESP32S3 with specific card processing logic.
+This project is based on the [MFRC522 library](https://github.com/miguelbalboa/rfid) and includes modifications to support writable UID cards.
 
+## License
+
+This project is released under the GPLv3.0 license.
