@@ -81,4 +81,4 @@ byte newUid[] = {0xDE, 0xAD, 0xBE, 0xEF};  // 自訂 UID
 
 ## license
 
-Unlicense license
+GPLv3.0
