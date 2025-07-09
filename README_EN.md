@@ -53,17 +53,33 @@ Modify the `newUid` array in the code:
 byte newUid[] = {0xDE, 0xAD, 0xBE, 0xEF};  // Your custom UID
 ```
 
+## Modify Write Key
+
+Modify the `defaultKey` array in the code:
+
+```cpp
+MFRC522::MIFARE_Key defaultKey = {{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}};
+```
+
+Other possible keys for reference:
+```cpp
+A0 A1 A2 A3 A4 A5
+B0 B1 B2 B3 B4 B5
+4D 3A 99 C3 51 DD
+1A 98 2C 7E 45 9A
+D3 F7 D3 F7 D3 F7
+AA BB CC DD EE FF
+00 00 00 00 00 00
+```
+
 ## How to Use
 
-1. Choose the correct example sketch for your board:
-
-   * [Arduino UNO Example](https://github.com/green-mochi/RC522-CUID/blob/main/arduino/arduino-rc522-cuid.ino)
-   * [ESP32S3 Example](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3/esp32s3-rc522-cuid.ino)
-2. Wire the hardware according to the pin configuration section
-3. Open the example in Arduino IDE and upload it to your board
-4. Open the Serial Monitor (baud rate: 9600 or 115200 depending on the sketch)
+1. Download the example program according to your language
+2. Complete the wiring according to the pin connection instructions
+3. Open and upload the program using Arduino IDE
+4. Open the Serial Monitor (choose baud rate: 9600)
 5. Place a card near the reader
-6. If the card is compatible, the program will attempt to write the new UID and display the result
+6. If the conditions are met, the program will automatically write the new card number and display the result
 
 ## Troubleshooting
 
@@ -71,8 +87,8 @@ byte newUid[] = {0xDE, 0xAD, 0xBE, 0xEF};  // Your custom UID
 * **UID write failed**: Make sure you are using a Gen2 Magic card (CUID) that supports writing to block 0
 * **Same card keeps being detected**: The program prevents duplicate writes; remove the card completely before trying again
 * **Unstable communication**: Check if jumper wires are loose
-* **Board not recognized**: Ensure drivers are installed, and that correct COM port and board type are selected in Arduino IDE. Install the board package via `Tools > Board > Board Manager` if needed
-* **Code upload fails**: Some boards require pressing a boot button during upload or using the correct USB port (some have multiple USB interfaces)
+* **Board not found**: First confirm that the drivers are installed, then check if the COM port and board options are selected correctly. If the board cannot be found, you need to manually install the board programmer in `Tools > Board > Boards Manager`
+* **Board detected but code upload fails**: Confirm whether the board needs a button press during upload, or if the board has two USB ports, make sure you're using the correct programming port
 
 ## Legal Disclaimer
 

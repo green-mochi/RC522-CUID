@@ -4,7 +4,7 @@
 
 ## 硬體需求
 
-* Arduino UNO 或 ESP32S3 開發板
+* 開發板 (Arduino UNO 或 ESP32S3)
 * MFRC522 RFID 模組
 * CUID 卡（Gen2 Magic Card）
 * 杜邦線數條
@@ -52,19 +52,37 @@ ESP32S3請視實際接線修改程式中的 `SPI` 與 `MFRC522` 腳位定義。
 ```cpp
 byte newUid[] = {0xDE, 0xAD, 0xBE, 0xEF};  // 自訂 UID
 ```
+## 修改寫入密鑰
+
+請修改程式碼中的 `defaultKey` 陣列：
+
+```cpp
+MFRC522::MIFARE_Key defaultKey = {{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}};
+```
+
+其他可能的密鑰請參考
+```cpp
+A0 A1 A2 A3 A4 A5
+B0 B1 B2 B3 B4 B5
+4D 3A 99 C3 51 DD
+1A 98 2C 7E 45 9A
+D3 F7 D3 F7 D3 F7
+AA BB CC DD EE FF
+00 00 00 00 00 00
+```
 
 ## 使用說明
 
-1. 選擇對應的主控板範例（例如：[arduino是這個](https://github.com/green-mochi/RC522-CUID/blob/main/arduino/arduino-rc522-cuid.ino) 或 [esp32s3是這個](https://github.com/green-mochi/RC522-CUID/blob/main/esp32s3/esp32s3-rc522-cuid.ino)）
+1. 根據語言下載範例程式
 2. 依照腳位接線說明完成接線
 3. 使用 Arduino IDE 開啟並上傳程式
-4. 開啟序列埠監控器（選擇速度：9600 或 115200，依範例程式而定）
+4. 開啟序列埠監控器（選擇速度：9600）
 5. 將卡片靠近讀卡器
-6. 若符合條件，程式會自動寫入新 UID 並提示結果
+6. 若符合條件，程式會自動寫入新卡號並提示結果
 
 ## 疑難排解
 
-* **無法偵測卡片**：請確認接線正確、卡片為 MIFARE 類型
+* **無法偵測卡片**：請確認接線正確以及卡片在其他設備上能夠被正常讀取
 * **UID 寫入失敗**：請確認卡片為 CUID卡（支援直接寫入block 0）
 * **重複偵測同一張卡**：程式預設避免重複寫入，請將卡片移開後再靠近
 * **通訊不穩定**：請確認杜邦線是否鬆脫
