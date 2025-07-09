@@ -73,7 +73,7 @@ AA BB CC DD EE FF
 
 ## 使用說明
 
-1. 根據語言下載範例程式
+1. 根據語言下載[範例程式](https://github.com/green-mochi/RC522-CUID/blob/main/rc522-cuid-zhtw.ino)
 2. 依照腳位接線說明完成接線
 3. 使用 Arduino IDE 開啟並上傳程式
 4. 開啟序列埠監控器（選擇速度：9600）
