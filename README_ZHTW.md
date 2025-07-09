@@ -61,7 +61,7 @@ MFRC522::MIFARE_Key defaultKey = {{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}};
 ```
 
 其他可能的密鑰請參考
-```cpp
+```
 A0 A1 A2 A3 A4 A5
 B0 B1 B2 B3 B4 B5
 4D 3A 99 C3 51 DD
