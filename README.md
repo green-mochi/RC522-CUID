@@ -1,6 +1,12 @@
+# RC522 and CUID
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=green-mochi&style=for-the-badge&color=green&label=REPO+VIEWS"></h1>
+</p>
+
 [中文說明](README_ZHTW.md)
 
-此repo底下包含了Arduino 與 ESP32S3 的CUID修改卡號程式，需搭配 MFRC522 模組使用。
+此repo底下包含了Arduino 與 ESP32S3 的 CUID 修改卡號程式，需搭配 MFRC522 模組使用。
 
 ---
 
