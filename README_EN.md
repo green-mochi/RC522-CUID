@@ -1,6 +1,6 @@
 Use an **Arduino UNO** or **ESP32S3** with the **MFRC522 RFID module** to modify the UID of a **CUID card (Gen2 Magic Card)**.
 
-This project provides example codes for both controllers. Choose the one that matches your development board.
+This project provides example codes for both controllers.
 
 ## Hardware Requirements
 
