@@ -74,7 +74,7 @@ AA BB CC DD EE FF
 
 ## How to Use
 
-1. Download the example program according to your language
+1. Download the [example program](https://github.com/green-mochi/RC522-CUID/blob/main/rc522-cuid-en.ino) according to your language
 2. Complete the wiring according to the pin connection instructions
 3. Open and upload the program using Arduino IDE
 4. Open the Serial Monitor (choose baud rate: 9600)
